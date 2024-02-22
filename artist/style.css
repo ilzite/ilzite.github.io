@@ -1,0 +1,26 @@
+h1{
+    background:lavender;
+    padding:45px;
+    text-align: center;
+    border:20px dotted green;
+}
+
+div{
+    width:100%;
+}
+
+img{
+    width:100%;
+    opacity:0.1;
+    transition: all 1s;
+    max-width:500px;
+}
+
+img:hover{
+    opacity:1;
+}
+
+p{
+    width:500px;
+    padding:15px;
+}
