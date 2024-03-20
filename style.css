@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <title>Document</title>
+    <style>
+    div {
+        width: 100px;
+        height: 100px;
+      }
+
+      .desktop {
+       <svg id="desktop.svg" data-name="desktop" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 2886.4 1466.14">
+    <defs>
+      <style>
+        .cls-1 {
+          fill: #a492c6;
+          opacity: .81;
+          stroke-width: 0px;
+        }
+  
+        .cls-2 {
+          fill: #010101;
+          font-family: AdobeMingStd-Light-B5pc-H, 'Adobe Ming Std';
+          font-size: 72px;
+          font-weight: 300;
+        }
+  
+        .cls-3 {
+          fill: #fff;
+          stroke: #754396;
+          stroke-miterlimit: 10;
+          stroke-width: 20px;
+        }
+      </style>
+    </defs>
+    <image width="3848" height="1949" transform="translate(.4 4.39) scale(.75)" xlink:href="data:image/png;base64,/>
+
+    <text class="cls-2" transform="translate(1234.68 894.58)"><tspan x="0" y="0">coming soon ..</tspan></text>
+  </svg>
+      }
+
+      .tablet {
+        <svg id="tablet.svg" data-name="tablet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1881.75 1461.75">
+      <defs>
+        <style>
+          .cls-1 {
+            fill: #a492c6;
+            opacity: .81;
+            stroke-width: 0px;
+          }
+    
+          .cls-2 {
+            fill: #010101;
+            font-family: AdobeMingStd-Light-B5pc-H, 'Adobe Ming Std';
+            font-size: 72px;
+            font-weight: 300;
+          }
+    
+          .cls-3 {
+            fill: #fff;
+            stroke: #754396;
+            stroke-miterlimit: 10;
+            stroke-width: 18px;
+          }
+        </style>
+      </defs>
+    </svg>
+      }
+
+      .phone {
+         <svg id="phone.svg" data-name="phone" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 808.5 1462.5">
+      <defs>
+        <style>
+          .cls-1 {
+            fill: #fff;
+            stroke: #754396;
+            stroke-miterlimit: 10;
+            stroke-width: 10px;
+          }
+    
+          .cls-2 {
+            fill: #a492c6;
+            opacity: .81;
+            stroke-width: 0px;
+          }
+    
+          .cls-3 {
+            fill: #010101;
+            font-family: AdobeMingStd-Light-B5pc-H, 'Adobe Ming Std';
+            font-size: 51.76px;
+            font-weight: 300;
+          }
+        </style>
+      </defs>
+    </svg>
+      }
+
+      .desktop {
+        display: block;
+      }
+      .tablet,
+      .phone {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .tablet {
+          display: block;
+        }
+        .phone {
+          display: none;
+        }
+        .desktop {
+          display: none;
+        }
+      }
+
+      @media (max-width: 425px) {
+        .tablet {
+          display: none;
+        }
+        .phone {
+          display: block;
+        }
+        .desktop {
+          display: none;
+        }
+      }
+  
+    </style>
+      
+</head>
+<body>
+  <div class="desktop">
+  </div>
+  <div class="tablet">
+  </div>
+  <div class="phone">
+  </div>
+  </body>
+  </html>
