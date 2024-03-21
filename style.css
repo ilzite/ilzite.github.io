@@ -3,7 +3,21 @@
         width: 100px;
         height: 100px;
       }
-
+      body { 
+        background-image: url(phone.svg);
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    body { 
+        background-image: url(desktop.svg);
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    body { 
+        background-image: url(tablet.svg);
+        background-attachment: fixed;
+        background-size: cover;
+    }
       .desktop {
         .cls-1 {
           fill: #a492c6;
