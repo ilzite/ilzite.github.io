@@ -3,10 +3,8 @@ let hasUserClicked = false;
 let circleX;
 let circleY;
 
-//let nightSound;
 let retroSound;
 function preload() {
-//  nightSound = loadSound('assets/night.mp3');
   retroSound = loadSound('assets/retro.mp3');
 }
 
@@ -27,12 +25,6 @@ function draw() {
   if (hasUserClicked == false) {
     text('hi, please click to start', width / 2, height / 2);
   } else {
-    // if (retroSound.isPlaying() == false) {
-      // retroSound.play();
-    // }
-
-   // let calculatedVolumeRetro = map(mouseX, 0, width, 0, 1);
-
     if (retroSound.isPlaying() == false) {
         retroSound.play();
     }
@@ -55,7 +47,6 @@ function draw() {
     );
 
     //volume needs a number between 0 - 1
-    //nightSound.setVolume(calculateVolumeNight);
     retroSound.setVolume(calculateVolumeRetro);
   }
 }
