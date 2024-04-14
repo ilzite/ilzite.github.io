@@ -3,11 +3,11 @@ let hasUserClicked = false;
 let circleX = 300;
 let circleY = 400;
 
-let riverSound;
-let metalSound;
+let nightSound;
+let retroSound;
 function preload() {
-  riverSound = loadSound('assets/river.wav');
-  metalSound = loadSound('assets/metal.wav');
+  nightSound = loadSound('assets/night.mp3');
+  retroSound = loadSound('assets/retro.mp3');
 }
 
 function setup() {
@@ -24,11 +24,11 @@ function draw() {
   if (hasUserClicked == false) {
     text('hi, please click to start', width / 2, height / 2);
   } else {
-    if (riverSound.isPlaying() == false) {
-      riverSound.play()
+    if (nightSound.isPlaying() == false) {
+      nightSound.play()
     }
 
-    let calculateVolumeRiver = map(
+    let calculatedVolumeNight = map(
       mouseX,           // the changing number
       0,                //min expected number
       width,            //max expected number
@@ -36,15 +36,15 @@ function draw() {
       1                 //max output number
      )
 
-    if (metalSound.isPlaying() == false) {
-        metalSound.play()
+    if (retroSound.isPlaying() == false) {
+        retroSound.play()
     }
 
     let distanceToCircle = dist(
       mouseX, mouseY,
       circleX, circleY
     )
-    let calculateVolumeMetal = map(
+    let calculatedVolumeRetro = map(
      distanceToCircle,  //the changing number
      0,                 //min expected number
      200,               //max expected number
@@ -52,13 +52,13 @@ function draw() {
      0                  //max output number
     )
 
-    calculatedVolumeMetal = constrain(
-      calculatedVolumeMetal, 0, 1
+    calculatedVolumeRetro = constrain(
+      calculatedVolumeRetro, 0, 1
     )
 
     //volume needs a number beteen 0 - 1
-    riverSound.setVolume(calculateVolumeRiver, 2)
-    metalSound.setVolume(calculateVolumeMetal, 2)
+    nightSound.setVolume(calculateVolumeNight, 2)
+    retroSound.setVolume(calculateVolumeRetro, 2)
   }
 }
 
