@@ -1,12 +1,12 @@
 let hasUserClicked = false;
 
-let circleX = 300;
-let circleY = 400;
+let circleX;
+let circleY;
 
-let nightSound;
+//let nightSound;
 let retroSound;
 function preload() {
-nightSound = loadSound('assets/night.mp3');
+//  nightSound = loadSound('assets/night.mp3');
   retroSound = loadSound('assets/retro.mp3');
 }
 
@@ -14,27 +14,24 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   textSize(20);
   textAlign(CENTER);
+
+circleX = random(width);
+circleY = random(height);
 }
 
 function draw() {
 
   background('lightgreen');
-  // circle(circleX, circleY, 50);
+  //circle(circleX, circleY, 50);
 
   if (hasUserClicked == false) {
     text('hi, please click to start', width / 2, height / 2);
   } else {
-    if (nightSound.isPlaying() == false) {
-      nightSound.play()
-    }
+    // if (retroSound.isPlaying() == false) {
+      // retroSound.play();
+    // }
 
-    let calculatedVolumeNight = map(
-      mouseX,           // the changing number
-      0,                //min expected number
-      width,            //max expected number
-      0,                //min output number
-      1                 //max output number
-     );
+   // let calculatedVolumeRetro = map(mouseX, 0, width, 0, 1);
 
     if (retroSound.isPlaying() == false) {
         retroSound.play();
@@ -44,6 +41,7 @@ function draw() {
       mouseX, mouseY,
       circleX, circleY
     );
+
     let calculateVolumeRetro = map(
      distanceToCircle,  //the changing number
      0,                 //min expected number
@@ -57,7 +55,7 @@ function draw() {
     );
 
     //volume needs a number between 0 - 1
-    nightSound.setVolume(calculateVolumeNight);
+    //nightSound.setVolume(calculateVolumeNight);
     retroSound.setVolume(calculateVolumeRetro);
   }
 }
