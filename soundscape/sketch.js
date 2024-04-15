@@ -30,10 +30,10 @@ function draw() {
   background('lightgreen');
 
   fill('babyblue')
-  circle(circleRetroX, circleRetroY, 50);
+  //circle(circleRetroX, circleRetroY, 50);
 
   fill('salmon')
-  circle(circleLofiX, circleLofiY, 50);
+  //circle(circleLofiX, circleLofiY, 50);
 
   if (hasUserClicked == false) {
     text('hi, please click to start', width / 2, height / 2);
