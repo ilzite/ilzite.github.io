@@ -5,6 +5,29 @@
     <title>ilzites aframe</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+    <script>
+      AFRAME.registerComponent('restrict-movement', {
+        tick: function () {
+          const cameraEl = this.el;
+          const position = cameraEl.getAttribute('position');
+
+          // Define the boundaries of the 3D model
+          const minX = -5, maxX = 5;
+          const minY = 0, maxY = 5;
+          const minZ = -5, maxZ = 5;
+
+          // Restrict the camera movement within the boundaries
+          if (position.x < minX) position.x = minX;
+          if (position.x > maxX) position.x = maxX;
+          if (position.y < minY) position.y = minY;
+          if (position.y > maxY) position.y = maxY;
+          if (position.z < minZ) position.z = minZ;
+          if (position.z > maxZ) position.z = maxZ;
+
+          cameraEl.setAttribute('position', position);
+        }
+      });
+    </script>
   </head>
   <body>
     <a-scene keyboard-shortcuts="enterVR: false">
@@ -25,8 +48,8 @@
 
       <a-entity gltf-model="#my-model" position="0 13.75 0" scale="1 1 1" class="collidable"></a-entity>
 
-      <a-entity id="camera" position="0 1.6 0" keyboard-controls>
-        <a-entity camera look-controls wasd-controls="acceleration:10" raycaster="objects: .collidable;" vertical-movement></a-entity>
+      <a-entity id="camera" camera look-controls custom-movement-controls position="0 1.6 0">
+        <a-entity raycaster="objects: .collidable; far: 1.5" id="raycaster" direction="0 0 -1"></a-entity>
       </a-entity>
       
       <a-image src="oliverbaby.jpg" 
@@ -129,61 +152,71 @@
     </a-scene>
 
     <script>
-      AFRAME.registerComponent('movement-within-boundaries', {
+      // Register a custom-movement-controls component
+      AFRAME.registerComponent('custom-movement-controls', {
         schema: {
-          speed: { default: 0.1 } // Default movement speed
+          speed: {default: 0.007}
         },
-    
+
         init: function () {
-          var el = this.el;
-          var data = this.data;
-    
-          window.addEventListener('keydown', function (event) {
-            var position = el.getAttribute('position');
-            var step = data.speed;
-    
-            switch (event.key) {
-              case 'w': // Move forward
-                position.z -= step;
-                break;
-              case 's': // Move backward
-                position.z += step;
-                break;
-              case 'a': // Move left
-                position.x -= step;
-                break;
-              case 'd': // Move right
-                position.x += step;
-                break;
-              case 'e': // Move up
-                position.y += step;
-                break;
-              case 'q': // Move down
-                position.y -= step;
-                break;
-              default:
-                return; // Exit if key doesn't correspond to movement
-            }
-    
-            // Check collisions with collidable entities (planes) to restrict movement
-            var raycaster = el.components.raycaster;
-            var intersections = raycaster.intersections;
-            var blocked = false;
-    
-            for (var i = 0; i < intersections.length; i++) {
-              if (intersections[i].object.el.classList.contains('collidable')) {
-                blocked = true;
-                break;
-              }
-            }
-    
-            // If movement is not blocked by collidables, update camera position
-            if (!blocked) {
-              el.setAttribute('position', position);
+          this.direction = new THREE.Vector3();
+          this.keys = {};
+          this.move = {x: 0, y: 0, z: 0};
+
+          window.addEventListener('keydown', (event) => {
+            this.keys[event.key] = true;
+          });
+
+          window.addEventListener('keyup', (event) => {
+            this.keys[event.key] = false;
+          });
+        },
+
+        tick: function (time, delta) {
+          const el = this.el;
+          const data = this.data;
+          const direction = this.direction;
+
+          // Reset move direction
+          this.move.x = 0;
+          this.move.y = 0;
+          this.move.z = 0;
+
+          // Determine direction based on key presses
+          if (this.keys['w']) { this.move.z -= data.speed; }
+          if (this.keys['s']) { this.move.z += data.speed; }
+          if (this.keys['a']) { this.move.x -= data.speed; }
+          if (this.keys['d']) { this.move.x += data.speed; }
+          if (this.keys['e']) { this.move.y += data.speed; }
+          if (this.keys['q']) { this.move.y -= data.speed; }
+
+          // Apply movement to the camera
+          direction.set(this.move.x, this.move.y, this.move.z);
+          direction.applyQuaternion(el.object3D.quaternion);
+          el.object3D.position.add(direction);
+        }
+      });
+
+      // Custom collision detection
+      AFRAME.registerComponent('restrict-movement', {
+        init: function () {
+          const cameraEl = this.el;
+          const raycasterEl = document.querySelector('#raycaster');
+
+          raycasterEl.addEventListener('raycaster-intersection', (evt) => {
+            const intersections = evt.detail.intersections;
+            if (intersections.length > 0) {
+              // Move the camera slightly back to avoid getting stuck
+              const position = cameraEl.getAttribute('position');
+              position.z += 0.1;  // Adjust this value as needed
+              cameraEl.setAttribute('position', position);
             }
           });
         }
       });
+
+      // Apply restrict-movement component to the camera
+      document.querySelector('#camera').setAttribute('restrict-movement', '');
     </script>
     
     

@@ -37,7 +37,9 @@ h1{
     text-align: center;
 }
 .gif {
+    display: inline-block;
     max-width: 600px;
     max-height: auto;
-    margin-right: 10px;
+    vertical-align: middle;
+    text-align: center;
 }
