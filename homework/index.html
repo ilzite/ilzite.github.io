@@ -4,7 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
+    <style>
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+}
+.background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+h1{
+    background:rgba(188, 188, 236, 0.8);
+    padding:20px;
+    text-align: center;
+}
+h3{
+    background:rgba(188, 188, 236, 0.8);
+    padding:20px;
+    text-align: center;
+}
+    </style>
 </body>
+    <div class="background" style="height:100vh; position: fixed; width: 100%; left:0; top:0">
+        <img width="100%" height="100%" style="object-fit: cover;" src="./background.png" alt="">
+    </div>
+    <div class="content">
   <h1>welcome</h1>
 
     <h3>
@@ -19,6 +48,6 @@
         Audio homework can be found <a href="./soundscape/index.html" target="_blank"> here</a>.
     </h3>
 
-    
+    </div>
 </body>
 </html>
